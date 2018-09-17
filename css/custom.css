@@ -1,0 +1,53 @@
+.reveal {
+  color: #65656c;
+  }
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+  color: #1954a6;
+  }
+
+.size40 {
+  width: 40%;
+  }
+
+.border-image {
+  background-color: #ffffff;
+  border: 2px solid #24a0d8 !important;
+  box-shadow: 0 0 20px #65656c !important;
+  padding: 5px !important;
+  }
+
+.reveal pre {
+  width: 120%;
+  margin-left: -10%;
+  }
+
+.reveal section img {
+  background: none;
+  border: none;
+  box-shadow: none;
+  }
+
+.kthblue {
+  color: #65656c;
+  }
+
+.align-left {
+  text-align: left;
+  }
+
+.align-right {
+  text-align: right;
+  }
+
+.with-border {
+  background-color: #ffffff;
+  border: 2px solid #9d102d !important;
+  box-shadow: 0 0 20px #65656c !important;
+  padding: 10px !important;
+  }

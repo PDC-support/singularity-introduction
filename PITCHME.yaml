@@ -1,0 +1,7 @@
+# Background
+
+background : img/background.png
+
+# Theme
+
+theme-override : css/custom.css
