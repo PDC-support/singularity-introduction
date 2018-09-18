@@ -182,7 +182,7 @@ Singularity my_image.simg:~> cat /etc/*-release
 
 ## @color[red](Test a container)
 
-@ol
+@ol[](false)
 - Go to docker hub and find official hello-world container
 - build the container using singularity
 - Use the container shell and get acquainted with it 
@@ -258,7 +258,7 @@ Singularity my_image.simg:~> ls
 
 ## @color[red](Create your own container)
 
-@ol
+@ol[](false)
 - Go to docker hub and find official latest ubuntu
 - build the container using singularity
 - Build a writeable sandbox
@@ -338,7 +338,7 @@ Cleaning up...
 
 ## @color[red](Create your own container)
 
-@ol
+@ol[](false)
 - Download the hello world code and move to container
   https://github.com/PDC-support/introduction-to-pdc/tree/master/example
 - Compile the hello world source code
@@ -373,7 +373,7 @@ mpirun -n 8 singularity exec -B /cfs/klemming hello_world.simg hello_world_mpi
 
 ## @color[red](Run a HPC container)
 
-@ol
+@ol[](false)
 - Goto /pdc/vol/singularity/2.5.1/shub
 - Run the hello-world image
 @olend
@@ -503,7 +503,7 @@ What should be executed with the run command.
 
 ## @color[red](Create a recipe)
 
-@ol
+@ol[](false)
 - Create a recipe with...
   - Based on UBUNTU
   - Install compilers
