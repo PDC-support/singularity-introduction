@@ -51,3 +51,8 @@
   box-shadow: 0 0 20px #65656c !important;
   padding: 10px !important;
   }
+
+.reveal nl {
+  list-style-type: decimal;
+  text-align: left;
+  }

@@ -85,7 +85,7 @@ Container<br>
 - Use same container in different SNIC clusters
 - Limits	user’s	privileges,	security	contexts
 - Same user inside container as on host
-- *Negligable performance decrease*
+- **Negligable performance decrease**
 
 ---
 
@@ -93,7 +93,7 @@ Container<br>
 
 - Works works great for local and private resources.
 - No HPC centra will install docker for you
-- Singularity is compatible with Docker images
+- **Singularity is compatible with Docker images**
 
 ---
 
@@ -111,7 +111,7 @@ https://singularity-hub.org/
 @snapend
 
 @snap[west with-border]
-**Local computer**
+**Local computer**<br>
 Create container<br>
 @color[#62922e](singularity build)<br>
 Install software<br>
@@ -123,7 +123,7 @@ Install libraries<br>
 @snapend
 
 @snap[east align-left with-border]
-**HPC cluster**
+**HPC cluster**<br>
 @color[#62922e](singularity shell)<br>
 @color[#62922e](singularity exec)<br>
 @color[#62922e](singularity help)<br>
@@ -174,16 +174,20 @@ Singularity my_image.simg:~> cat /etc/*-release
 
 ```
 
+@snap[align-right]
+@color[red](Do it yourself:)
+@snapend
+
 +++
 
 ## @color[red](Test a container)
 
-@ol
+@nl
 - Go to docker hub and find official hello-world container
 - build the container using singularity
 - Use the container shell and get acquainted with it 
 - Run the hello-world command
-@olend
+@nlend
 
 ---
 
@@ -246,6 +250,20 @@ $ singularity shell my_image.simg
 Singularity: Invoking an interactive shell within container...
 Singularity my_image.simg:~> ls
 ```
+@snap[align-right]
+@color[red](Do it yourself:)
+@snapend
+
++++
+
+## @color[red](Create your own container)
+
+@ol
+- Go to docker hub and find official latest ubuntu
+- build the container using singularity
+- Build a writeable sandbox
+- Install necessary tools into the container (Compiler etc...)
+@olend
 
 ---
 
@@ -312,15 +330,15 @@ Singularity container built: my_new_image.simg
 Cleaning up...
 ```
 
+@snap[align-right]
+@color[red](Do it yourself:)
+@snapend
+
 +++
 
 ## @color[red](Create your own container)
 
 @ol
-- Go to docker hub and find official latest ubuntu
-- build the container using singularity
-- Build a writeable sandbox
-- Install necessary tools into the container (Compiler etc...)
 - Download the hello world code and move to container
   https://github.com/PDC-support/introduction-to-pdc/tree/master/example
 - Compile the hello world source code
@@ -346,6 +364,10 @@ salloc -t <time> -A 201X-X-XX
 module add gcc/6.2.0 openmpi/3.0-gcc-6.2
 mpirun -n 8 singularity exec -B /cfs/klemming hello_world.simg hello_world_mpi
 ```
+
+@snap[align-right]
+@color[red](Do it yourself:)
+@snapend
 
 +++
 
@@ -472,6 +494,10 @@ What should be executed with the run command.
     mysoftware -param1 -param2
     
 ```
+
+@snap[align-right]
+@color[red](Do it yourself:)
+@snapend
 
 +++
 
