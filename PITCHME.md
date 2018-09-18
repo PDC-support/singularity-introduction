@@ -52,17 +52,19 @@ Container<br>
 
 ---
 
-Docker, the most popular container
+## Docker, the most popular container
+
+![](img/docker.png)
 
 ---
 
 ## The Docker container software
 
-- The most know container software
+- The most know and utilized container software
 - Facilites workflow for creating, maintaining and distributing software
 - Used by many scientist
-- high reproducible
-- @color[red](Not used on HPC clusters)
+- Containers are reproducible
+- Easy to install, well documented, standardized
 
 ---
 
@@ -72,6 +74,7 @@ Docker, the most popular container
 - No native GPU support
 - No support for MPI
 - Incompabilities with scheduling managers
+- @color[red](Not allowed on HPC clusters)
 
 ---
 
@@ -81,8 +84,51 @@ Docker, the most popular container
 - Package software and dependencies in one file
 - Use same container in different SNIC clusters
 - Limits	user’s	privileges,	security	contexts
-- Compatible with Docker images https://hub.docker.com/explore/
-- Negligable performance decrease
+- Same user inside container as on host
+- *Negligable performance decrease*
+
+---
+
+### But I want to keep using docker
+
+- Works works great for local and private resources.
+- No HPC centra will install docker for you
+- Singularity is compatible with Docker images
+
+---
+
+## Singularity hub
+
+https://singularity-hub.org/
+@snap[with-border]
+![](img/hub.png)
+@snapend
+
+---
+
+@snap[north-west]
+<h2>Singularity workflow</h2>
+@snapend
+
+@snap[west with-border]
+**Local computer**
+Create container<br>
+@color[#62922e](singularity build)<br>
+Install software<br>
+Install libraries<br>
+@snapend
+
+@snap[kthblue]
+@fa[arrow-right fa-4x]
+@snapend
+
+@snap[east align-left with-border]
+**HPC cluster**
+@color[#62922e](singularity shell)<br>
+@color[#62922e](singularity exec)<br>
+@color[#62922e](singularity help)<br>
+@color[#62922e](singularity run)<br>
+@snapend
 
 ---
 
@@ -107,40 +153,7 @@ For Mac or Windows, follow instructions at https://www.sylabs.io/guides/2.6/user
 
 ---
 
-## Singularity hub
-
-https://singularity-hub.org/
-@snap[with-border]
-![](img/hub.png)
-@snapend
-
----
-
-@snap[north-west]
-<h2>Singularity workflow</h2>
-@snapend
-
-@snap[west with-border]
-Create container<br>
-@color[#62922e](singularity build)<br>
-Install software<br>
-Install libraries<br>
-@snapend
-
-@snap[kthblue]
-@fa[arrow-right fa-4x]
-@snapend
-
-@snap[east align-left with-border]
-@color[#62922e](singularity shell)<br>
-@color[#62922e](singularity exec)<br>
-@color[#62922e](singularity help)<br>
-@color[#62922e](singularity run)<br>
-@snapend
-
----
-
-Using the container
+## Using the container
 
 ---
 
@@ -160,13 +173,21 @@ Singularity: Invoking an interactive shell within container...
 Singularity my_image.simg:~> cat /etc/*-release
 
 ```
-@snap[red align-right]
-@color[red](Do it yourself:)
-@snapend
+
++++
+
+## @color[red](Test a container)
+
+@ol
+- Go to docker hub and find official hello-world container
+- build the container using singularity
+- Use the container shell and get acquainted with it 
+- Run the hello-world command
+@olend
 
 ---
 
-How to build containers
+## How to build containers
 
 ---
 
@@ -291,9 +312,22 @@ Singularity container built: my_new_image.simg
 Cleaning up...
 ```
 
-@snap[red align-right]
-@color[red](Do it yourself:)
-@snapend
++++
+
+## @color[red](Create your own container)
+
+@ol
+- Go to docker hub and find official latest ubuntu
+- build the container using singularity
+- Build a writeable sandbox
+- Install necessary tools into the container (Compiler etc...)
+- Download the hello world code and move to container
+  https://github.com/PDC-support/introduction-to-pdc/tree/master/example
+- Compile the hello world source code
+- Create a help file
+- Create a runscript running hello world
+- Create a new container from the sandbox
+@olend
 
 ---
 
@@ -301,6 +335,7 @@ Cleaning up...
 
 - OpenMPI version must be the same in container and cluster
 - Compiler and version must be the same in container and cluster
+- You need to bind to the LUSTRE file system at PDC so it can be detected
 
 ---
 
@@ -312,9 +347,14 @@ module add gcc/6.2.0 openmpi/3.0-gcc-6.2
 mpirun -n 8 singularity exec -B /cfs/klemming hello_world.simg hello_world_mpi
 ```
 
-@snap[red align-right]
-@color[red](Do it yourself:)
-@snapend
++++
+
+## @color[red](Run a HPC container)
+
+@ol
+- Goto /pdc/vol/singularity/2.5.1/shub
+- Run the hello-world image
+@olend
 
 ---
 
@@ -322,7 +362,7 @@ mpirun -n 8 singularity exec -B /cfs/klemming hello_world.simg hello_world_mpi
 
 ---
 
-Creating recipes for singularity
+## Creating recipes for singularity
 
 ---
 
@@ -407,7 +447,7 @@ What softwares should be installed in my container.
     apt-get install build-essential
 ```
 @snap[red align-left]
-@color[red](Notice: We do not have to sudo)
+@color[red](Notice: We do not have to sudo in the container)
 @snapend
 
 ---
@@ -433,9 +473,17 @@ What should be executed with the run command.
     
 ```
 
-@snap[red align-right]
-@color[red](Do it yourself:)
-@snapend
++++
+
+## @color[red](Create a recipe)
+
+@ol
+- Create a recipe with...
+  - Based on UBUNTU
+  - Install compilers
+  - Create a help text
+  - Create a runscript
+@olend
 
 ---
 
