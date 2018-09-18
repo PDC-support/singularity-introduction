@@ -52,7 +52,6 @@
   padding: 10px !important;
   }
 
-.reveal nl {
-  list-style-type: decimal;
-  text-align: left;
+.reveal ol {
+  display: none;
   }

@@ -178,16 +178,16 @@ Singularity my_image.simg:~> cat /etc/*-release
 @color[red](Do it yourself:)
 @snapend
 
-+++
+---
 
 ## @color[red](Test a container)
 
-@nl
+@ol
 - Go to docker hub and find official hello-world container
 - build the container using singularity
 - Use the container shell and get acquainted with it 
 - Run the hello-world command
-@nlend
+@olend
 
 ---
 
@@ -254,7 +254,7 @@ Singularity my_image.simg:~> ls
 @color[red](Do it yourself:)
 @snapend
 
-+++
+---
 
 ## @color[red](Create your own container)
 
@@ -334,7 +334,7 @@ Cleaning up...
 @color[red](Do it yourself:)
 @snapend
 
-+++
+---
 
 ## @color[red](Create your own container)
 
@@ -369,7 +369,7 @@ mpirun -n 8 singularity exec -B /cfs/klemming hello_world.simg hello_world_mpi
 @color[red](Do it yourself:)
 @snapend
 
-+++
+---
 
 ## @color[red](Run a HPC container)
 
@@ -499,7 +499,7 @@ What should be executed with the run command.
 @color[red](Do it yourself:)
 @snapend
 
-+++
+---
 
 ## @color[red](Create a recipe)
 
