@@ -183,8 +183,7 @@ Singularity my_image.simg:~> cat /etc/*-release
 ## @color[red](Test a container)
 
 @ol[](false)
-- Go to singularity hub and find the hello-world container
-  - https://singularity-hub.org/collections
+- Go to singularity hub and find the hello-world container (https://singularity-hub.org/collections)
 - build the container using singularity
 - Use the container shell and get acquainted with it 
 @olend
@@ -262,9 +261,9 @@ Singularity my_image.simg:~> ls
 - build the container using singularity
 - Build a writeable sandbox
 - Install necessary tools into the container (Compiler etc...)
-  - apt-get update
-  - apt-get install wget
-  - apt-get install build-essential
+   - apt-get update
+   - apt-get install wget
+   - apt-get install build-essential
 @olend
 
 ---
@@ -395,7 +394,7 @@ mpirun -n 8 singularity exec -B /cfs/klemming hello_world.simg hello_world_mpi
 - Login into tegner.pdc.kth.se
 - load module singularity
 - Goto /pdc/vol/singularity/2.5.1/shub
-  - $PDC_SHUB
+   - $PDC_SHUB
 - execute the hello-world image
 @olend
 
@@ -494,9 +493,9 @@ What softwares should be installed in my container.
     apt-get install -y build-essential
 ```
 
-@snap[red align-left]
-No interaction in the scripts<br>
-Notice: We do not have to sudo in the container
+@snap[align-left]
+@color[red](No interaction in the scripts)<br>
+@color[red](We do not have to sudo in the container)
 @snapend
 
 ---
@@ -532,10 +531,10 @@ What should be executed with the run command.
 
 @ol[](false)
 - Create a recipe with...
-  - Based on UBUNTU
-  - Install compilers
-  - Create a help text
-  - Create a runscript
+   - Based on UBUNTU
+   - Install compilers
+   - Create a help text
+   - Create a runscript
 @olend
 
 ---
