@@ -183,10 +183,10 @@ Singularity my_image.simg:~> cat /etc/*-release
 ## @color[red](Test a container)
 
 @ol[](false)
-- Go to docker hub and find official hello-world container
+- Go to singularity hub and find the hello-world container
+  - https://singularity-hub.org/collections
 - build the container using singularity
 - Use the container shell and get acquainted with it 
-- Run the hello-world command
 @olend
 
 ---
@@ -230,9 +230,8 @@ in your container when in write-mode
 ## How to transfer files into the container
 
 ```
-sudo singularity exec -w my_sandbox mkdir singularity_folder
-sudo singularity shell --bind my_folder:/root/singularity_folder -w ubuntu_write/
-cp singularity_folder/my_files .
+$ sudo singularity exec -w my_sandbox mkdir singularity_folder
+$ sudo singularity shell -B my_folder:/root/singularity_folder -w ubuntu_write/
 ```
 
 ---
@@ -259,10 +258,13 @@ Singularity my_image.simg:~> ls
 ## @color[red](Create your own container)
 
 @ol[](false)
-- Go to docker hub and find official latest ubuntu
+- Go to docker hub and find the official latest ubuntu
 - build the container using singularity
 - Build a writeable sandbox
 - Install necessary tools into the container (Compiler etc...)
+  - apt-get update
+  - apt-get install wget
+  - apt-get install build-essential
 @olend
 
 ---
@@ -339,17 +341,33 @@ Cleaning up...
 ## @color[red](Create your own container)
 
 @ol[](false)
-- Download the hello world code and move to container
-  https://github.com/PDC-support/introduction-to-pdc/tree/master/example
-- Compile the hello world source code
 - Create a help file
-- Create a runscript running hello world
+- Create/Edit the runscript running hello world
 - Create a new container from the sandbox
 @olend
 
 ---
 
 ## Running your container in an HPC environment
+
+---
+
+## What are the required tools
+
+wget, build-essential, lzip, m4, libgfortran3, gmp, mpfr, mpc,
+zlib, gcc, openmpi, cmake, python
+
+https://www.pdc.kth.se/software/software/singularity/centos7/2.5.1/index.html
+
+- On AFS
+  - /afs/pdc.kth.se/pdc/vol/singularity/2.5.1/shub.backup
+- On Lustre
+  - /cfs/klemming/pdc.vol.tegner/singularity/2.4.2/shub
+- **Image:** ubuntu-16.04.3-gcc-basic.simg
+
+---
+
+## Requirements
 
 - OpenMPI version must be the same in container and cluster
 - Compiler and version must be the same in container and cluster
@@ -361,7 +379,7 @@ Cleaning up...
 
 ```
 salloc -t <time> -A 201X-X-XX
-module add gcc/6.2.0 openmpi/3.0-gcc-6.2
+module add gcc/6.2.0 openmpi/3.0-gcc-6.2 singularity
 mpirun -n 8 singularity exec -B /cfs/klemming hello_world.simg hello_world_mpi
 ```
 
@@ -374,13 +392,20 @@ mpirun -n 8 singularity exec -B /cfs/klemming hello_world.simg hello_world_mpi
 ## @color[red](Run a HPC container)
 
 @ol[](false)
+- Login into tegner.pdc.kth.se
+- load module singularity
 - Goto /pdc/vol/singularity/2.5.1/shub
-- Run the hello-world image
+  - $PDC_SHUB
+- execute the hello-world image
 @olend
 
 ---
 
-## Using GPUs
+## How about GPUs?
+
+In order to run singularity images that do rely on GPU, you need first to
+book a node that does contain a GPU, and then submit it as normal.
+There is no need to define which GPU or link to the CUDA module to make it work.
 
 ---
 
@@ -418,11 +443,11 @@ From: ubuntu:latest
 %files
     mydata.txt /home
 %post
-    apt-get update
-    apt-get install wget
-    apt-get install build-essential
+    apt-get -y update
+    apt-get install -y wget
+    apt-get install -y build-essential
 %runscript
-    ls -l
+    echo "This is my runscript"
 ```
 
 ---
@@ -464,12 +489,14 @@ What softwares should be installed in my container.
 
 ```
 %post
-    apt-get update
-    apt-get install wget
-    apt-get install build-essential
+    apt-get -y update
+    apt-get install -y wget
+    apt-get install -y build-essential
 ```
+
 @snap[red align-left]
-@color[red](Notice: We do not have to sudo in the container)
+No interaction in the scripts<br>
+Notice: We do not have to sudo in the container
 @snapend
 
 ---
