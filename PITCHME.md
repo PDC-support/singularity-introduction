@@ -261,10 +261,11 @@ Singularity my_image.simg:~> ls
 - build the container using singularity
 - Build a writeable sandbox
 - Install necessary tools into the container (Compiler etc...)
-
+  @ol[](false)
     - apt-get update
     - apt-get install wget
     - apt-get install build-essential
+  @olend
 @olend
 
 ---
@@ -395,7 +396,7 @@ mpirun -n 8 singularity exec -B /cfs/klemming hello_world.simg hello_world_mpi
 - Login into tegner.pdc.kth.se
 - load module singularity
 - Goto /pdc/vol/singularity/2.5.1/shub
-    - $PDC_SHUB
+    - **Path:** $PDC_SHUB
 - execute the hello-world image
 @olend
 
@@ -403,9 +404,9 @@ mpirun -n 8 singularity exec -B /cfs/klemming hello_world.simg hello_world_mpi
 
 ## How about GPUs?
 
-In order to run singularity images that do rely on GPU, you need first to
-book a node that does contain a GPU, and then submit it as normal.
-There is no need to define which GPU or link to the CUDA module to make it work.
+- Book a node that contains a GPU
+- Submit as normal
+- **There is no need to define which GPU or link to the CUDA module**
 
 ---
 
@@ -531,11 +532,10 @@ What should be executed with the run command.
 ## @color[red](Create a recipe)
 
 @ol[](false)
-- Create a recipe with...
-    - Based on UBUNTU
-    - Install compilers
-    - Create a help text
-    - Create a runscript
+- Based on UBUNTU
+- Install compilers
+- Create a help text
+- Create a runscript
 @olend
 
 ---
@@ -545,4 +545,3 @@ What should be executed with the run command.
 - https://gitpitch.com/PDC-support/singularity-introduction#/
 - https://www.pdc.kth.se/software/software/singularity/
 - https://www.sylabs.io/guides/2.6/user-guide/
-
