@@ -256,15 +256,15 @@ Singularity my_image.simg:~> ls
 
 ## @color[red](Create your own container)
 
-@ol[](false)
+@ul[](false)
 - Go to docker hub and find the official latest ubuntu
 - build the container using singularity
 - Build a writeable sandbox
 - Install necessary tools into the container (Compiler etc...)
-  apt-get update
-  apt-get install wget
-  apt-get install build-essential
-@olend
+  - apt-get update
+  - apt-get install wget
+  - apt-get install build-essential
+@ulend
 
 ---
 
@@ -393,8 +393,7 @@ mpirun -n 8 singularity exec -B /cfs/klemming hello_world.simg hello_world_mpi
 @ol[](false)
 - Login into tegner.pdc.kth.se
 - load module singularity
-- Goto /pdc/vol/singularity/2.5.1/shub
-    - **Path:** $PDC_SHUB
+- Goto /pdc/vol/singularity/2.5.1/shub (**Path:** $PDC_SHUB)
 - execute the hello-world image
 @olend
 
