@@ -261,12 +261,9 @@ Singularity my_image.simg:~> ls
 - build the container using singularity
 - Build a writeable sandbox
 - Install necessary tools into the container (Compiler etc...)
-  @ol[](false)
-    - apt-get update
-    - apt-get install wget
-    - apt-get install build-essential
-  @olend
-- test
+  * apt-get update
+  * apt-get install wget
+  * apt-get install build-essential
 @olend
 
 ---
