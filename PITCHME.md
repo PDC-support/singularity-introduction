@@ -266,6 +266,7 @@ Singularity my_image.simg:~> ls
     - apt-get install wget
     - apt-get install build-essential
   @olend
+- test
 @olend
 
 ---
@@ -339,7 +340,7 @@ Cleaning up...
 
 ---
 
-## @color[red](Create your own container)
+## @color[red](Edit your own container)
 
 @ol[](false)
 - Create a help file
