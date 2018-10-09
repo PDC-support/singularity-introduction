@@ -94,6 +94,7 @@ Container<br>
 - Works works great for local and private resources.
 - No HPC centra will install docker for you
 - **Singularity is compatible with Docker images**
+- @color[red](Latest version: 3.0.0)
 
 ---
 
@@ -135,12 +136,12 @@ Install libraries<br>
 ## Install singularity in Linux
 
 ```
-$ VERSION=X.X.X
+$ VERSION=2.5.2
 $ sudo apt-get update
 $ sudo apt-get install libarchive-dev
 $ sudo apt-get install squashfs-tools
 # Get and install
-$ wget https://github.com/singularityware/singularity/releases/
+$ wget https://github.com/sylabs/singularity/releases/
 download/$VERSION/singularity-$VERSION.tar.gz
 $ tar xvf singularity-$VERSION.tar.gz
 $ cd singularity-$VERSION
