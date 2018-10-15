@@ -62,29 +62,29 @@ Container<br>
 
 - The most know and utilized container software
 - Facilites workflow for creating, maintaining and distributing software
-- Used by many scientist
 - Containers are reproducible
 - Easy to install, well documented, standardized
+- Used by many scientist
 
 ---
 
 ## Docker on HPC: The problem
 
-- Docker users can escalate to root access on the cluster
-- No native GPU support
+- Incompabilities with scheduling managers (SLURM...)
 - No support for MPI
-- Incompabilities with scheduling managers
+- No native GPU support
+- Docker users can escalate to root access on the cluster
 - @color[red](Not allowed on HPC clusters)
 
 ---
 
 ## Singularity: Containers for the HPC environment
 
-- No need for modules
 - Package software and dependencies in one file
 - Use same container in different SNIC clusters
 - Limits	user’s	privileges,	security	contexts
 - Same user inside container as on host
+- No need for modules
 - **Negligable performance decrease**
 
 ---
@@ -106,12 +106,20 @@ https://singularity-hub.org/
 
 ---
 
+## Singularity Versions
+
+- Latest version: 3.0.0 (2018-10-08)
+- Installed on Tegner: 2.5.1
+- Installed on VM: 2.5.2
+
+---
+
 @snap[north-west]
 <h2>Singularity workflow</h2>
 @snapend
 
 @snap[west with-border]
-**Local computer**<br>
+**Local computer (ROOT)**<br>
 Create container<br>
 @color[#62922e](singularity build)<br>
 Install software<br>
@@ -123,20 +131,12 @@ Install libraries<br>
 @snapend
 
 @snap[east align-left with-border]
-**HPC cluster**<br>
+**HPC cluster (USER)**<br>
 @color[#62922e](singularity shell)<br>
 @color[#62922e](singularity exec)<br>
 @color[#62922e](singularity help)<br>
 @color[#62922e](singularity run)<br>
 @snapend
-
----
-
-## Singularity Versions
-
-- Latest version: 3.0.0 (2018-10-08)
-- Installed on Tegner: 2.5.1
-- Installed on VM: 2.5.2
 
 ---
 
@@ -229,8 +229,9 @@ Singularity my_sandbox:~>
 
 ## Transfer files into container
 
-Folder path are on your local computer when in read-mode whereas
-in your container when in write-mode
+**Read mode:** You can read/write to file system outside container and
+read inside container.
+**write mode:** You can read/write inside container.
 
 ---
 
@@ -362,15 +363,14 @@ Cleaning up...
 ## What are the required tools
 
 wget, build-essential, lzip, m4, libgfortran3, gmp, mpfr, mpc,
-zlib, gcc, openmpi, cmake, python
-
-https://www.pdc.kth.se/software/software/singularity/centos7/2.5.1/index.html
+zlib, gcc, openmpi, cmake, python, cuda
 
 - On AFS
   - /afs/pdc.kth.se/pdc/vol/singularity/2.5.1/shub.backup
 - On Lustre
   - /cfs/klemming/pdc.vol.tegner/singularity/2.4.2/shub
 - **Image:** ubuntu-16.04.3-gcc-basic.simg
+- https://www.pdc.kth.se/software
 
 ---
 
@@ -411,11 +411,10 @@ mpirun -n 8 singularity exec -B /cfs/klemming hello_world.simg hello_world_mpi
 
 **Flag:** --nv
 
-Finds the relevant Nvidia/Cuda libraries on your host.
+Finds the relevant nVidia/CUDA libraries on your host.
  
 ```
 salloc -t <time> -A <allocationID> --gres=gpu:K420:1
-module add singularity
 srun -N 1 singularity exec --nv -B /cfs/klemming cuda.simg cuda_device
 Device Number: 0
   Device name: Quadro K420
@@ -513,7 +512,7 @@ What softwares should be installed in my container.
 
 @snap[align-left]
 @color[red](No interaction in the scripts)<br>
-@color[red](We do not have to sudo in the container)
+@color[red](We do not need sudo in the container)
 @snapend
 
 ---
@@ -524,7 +523,8 @@ What local files should be copied into my container
 
 ```
 %files
-    mydata.txt /home
+    # <filename> <singularity path>
+    myfile.txt /opt
 ```
 
 ---
@@ -558,6 +558,6 @@ What should be executed with the run command.
 
 ## Useful links
 
-- https://gitpitch.com/PDC-support/singularity-introduction#/
 - https://www.pdc.kth.se/software/software/singularity/
 - https://www.sylabs.io/guides/2.6/user-guide/
+- https://gitpitch.com/PDC-support/singularity-introduction#/
