@@ -119,7 +119,8 @@ https://singularity-hub.org/
 @snapend
 
 @snap[west with-border]
-**Local computer (ROOT)**<br>
+**Local computer**<br>
+**(ROOT)**<br>
 Create container<br>
 @color[#62922e](singularity build)<br>
 Install software<br>
@@ -131,7 +132,8 @@ Install libraries<br>
 @snapend
 
 @snap[east align-left with-border]
-**HPC cluster (USER)**<br>
+**HPC cluster)**<br>
+**(USER)**<br>
 @color[#62922e](singularity shell)<br>
 @color[#62922e](singularity exec)<br>
 @color[#62922e](singularity help)<br>
@@ -231,6 +233,7 @@ Singularity my_sandbox:~>
 
 **Read mode:** You can read/write to file system outside container and
 read inside container.
+
 **write mode:** You can read/write inside container.
 
 ---
