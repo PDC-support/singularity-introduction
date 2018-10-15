@@ -94,7 +94,6 @@ Container<br>
 - Works works great for local and private resources.
 - No HPC centra will install docker for you
 - **Singularity is compatible with Docker images**
-- @color[red](Latest version: 3.0.0)
 
 ---
 
@@ -130,6 +129,14 @@ Install libraries<br>
 @color[#62922e](singularity help)<br>
 @color[#62922e](singularity run)<br>
 @snapend
+
+---
+
+## Singularity Versions
+
+- Latest version: 3.0.0 (2018-10-08)
+- Installed on Tegner: 2.5.1
+- Installed on VM: 2.5.2
 
 ---
 
@@ -378,7 +385,7 @@ https://www.pdc.kth.se/software/software/singularity/centos7/2.5.1/index.html
 ## Book an interactive node and execute
 
 ```
-salloc -t <time> -A 201X-X-XX
+salloc -t <time> -A <allocationID>
 module add gcc/6.2.0 openmpi/3.0-gcc-6.2 singularity
 mpirun -n 8 singularity exec -B /cfs/klemming hello_world.simg hello_world_mpi
 ```
@@ -402,9 +409,20 @@ mpirun -n 8 singularity exec -B /cfs/klemming hello_world.simg hello_world_mpi
 
 ## How about GPUs?
 
-- Book a node that contains a GPU
-- Submit as normal
-- **There is no need to define which GPU or link to the CUDA module**
+**Flag:** --nv
+
+Finds the relevant Nvidia/Cuda libraries on your host.
+ 
+```
+salloc -t <time> -A <allocationID> --gres=gpu:K420:1
+module add singularity
+srun -N 1 singularity exec --nv -B /cfs/klemming cuda.simg cuda_device
+Device Number: 0
+  Device name: Quadro K420
+  Memory Clock Rate (KHz): 891000
+  Memory Bus Width (bits): 128
+  Peak Memory Bandwidth (GB/s): 28.512000
+```
 
 ---
 
