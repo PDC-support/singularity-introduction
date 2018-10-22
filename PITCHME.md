@@ -23,7 +23,6 @@
 ## What are containers
 
 ![borderless](img/container.png)
-
 ---
 
 @snap[north-west]
@@ -49,6 +48,14 @@ Container<br>
 - Portability
 - Depending on application and use-case, simple extreme scalability
 - Next logical progession from virtual machines
+
+---
+
+## Why do we want containers in HPC?
+
+- Escape “dependency hell”
+- Local and remote code works identically every time
+- One file contains everything and can be moved anywhere
 
 ---
 
@@ -89,7 +96,7 @@ Container<br>
 
 ---
 
-### But I want to keep using docker
+## But I want to keep using docker
 
 - Works works great for local and private resources.
 - No HPC centra will install docker for you
@@ -150,7 +157,7 @@ $ sudo apt-get update
 $ sudo apt-get install libarchive-dev
 $ sudo apt-get install squashfs-tools
 # Get and install
-$ wget https://github.com/sylabs/singularity/releases/
+$ wget github.com/sylabs/singularity/releases/
 download/$VERSION/singularity-$VERSION.tar.gz
 $ tar xvf singularity-$VERSION.tar.gz
 $ cd singularity-$VERSION
@@ -160,6 +167,19 @@ $ sudo make install
 ```
 
 For Mac or Windows, follow instructions at https://www.sylabs.io/guides/2.6/user-guide/installation.html
+
+---
+
+## Launching a container
+
+- Singularity sets up the container environment and creates the necessary
+  namespaces and execv()s the application(s) within the container
+- Directories, files and other resources are shared from the host into the
+  container (as allowed by the system administrator)
+- All expected I/O is passed through the container: pipes, program arguments,
+  stdout, stdin, stderr and X11
+- When the application(s) finish their foreground execution process, the
+  container and namespaces collapse and vanish cleanly
 
 ---
 
@@ -242,7 +262,7 @@ read inside container.
 
 ```
 $ sudo singularity exec -w my_sandbox mkdir singularity_folder
-$ sudo singularity shell -B my_folder:/root/singularity_folder -w ubuntu_write/
+$ sudo singularity shell -B my_folder:/root/singularity_folder -w my_sandbox
 ```
 
 ---
@@ -282,6 +302,8 @@ Singularity my_image.simg:~> ls
 
 ## singularity.d folder
 
+Startup scripts etc... for your singularity image
+
 ```
 $ singularity exec my_image.simg ls -l /.singularity.d
 total 1
@@ -310,6 +332,9 @@ command
 @snapend
 ```
 $ singularity run my_image.simg
+total 1
+drwxr-xr-x 2 root root  76 Sep 11 17:05 file1
+drwxr-xr-x 2 root root 139 Sep 11 17:23 file2
 ```
 
 ---
