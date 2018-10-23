@@ -91,14 +91,14 @@ Container<br>
 - Use same container in different SNIC clusters
 - Limits	user’s	privileges,	security	contexts
 - Same user inside container as on host
-- No need for modules
+- No need for most modules
 - **Negligable performance decrease**
 
 ---
 
 ## But I want to keep using docker
 
-- Works works great for local and private resources.
+- Works great for local and private resources.
 - No HPC centra will install docker for you
 - **Singularity is compatible with Docker images**
 
@@ -173,11 +173,11 @@ For Mac or Windows, follow instructions at https://www.sylabs.io/guides/2.6/user
 ## Launching a container
 
 - Singularity sets up the container environment and creates the necessary
-  namespaces and execv()s the application(s) within the container
+  namespaces.
 - Directories, files and other resources are shared from the host into the
-  container (as allowed by the system administrator)
+  container.
 - All expected I/O is passed through the container: pipes, program arguments,
-  stdout, stdin, stderr and X11
+  std, X11
 - When the application(s) finish their foreground execution process, the
   container and namespaces collapse and vanish cleanly
 
@@ -210,7 +210,7 @@ Singularity my_image.simg:~> cat /etc/*-release
 
 ---
 
-## @color[red](Test a container)
+## @color[red](Exercise 1: Test a container)
 
 @ol[](false)
 - Go to singularity hub and find the hello-world container (https://singularity-hub.org/collections)
@@ -286,7 +286,7 @@ Singularity my_image.simg:~> ls
 
 ---
 
-## @color[red](Create your own container)
+## @color[red](Exercise 2: Create your own container)
 
 @ul[](false)
 - Go to docker hub and find the official latest ubuntu
@@ -294,7 +294,6 @@ Singularity my_image.simg:~> ls
 - Build a writeable sandbox
 - Install necessary tools into the container (Compiler etc...)
   - apt-get update
-  - apt-get install wget
   - apt-get install build-essential
 @ulend
 
@@ -311,7 +310,7 @@ drwxr-xr-x 2 root root  76 Sep 11 17:05 actions
 drwxr-xr-x 2 root root 139 Sep 11 17:23 env
 drwxr-xr-x 2 root root   3 Sep 11 17:05 libs
 -rwxr-xr-x 1 root root  33 Sep 11 17:23 runscript
--rwxr-xr-x 1 root root  10 Sep 11 17:05 startscript
+-rwxr-xr-x 1 root root  10 Sep 11 17:05 runscript.help
 ```
 
 ---
@@ -374,7 +373,7 @@ Cleaning up...
 
 ---
 
-## @color[red](Edit your own container)
+## @color[red](Exercise 3: Edit your own container)
 
 @ol[](false)
 - Create a help file
@@ -410,10 +409,17 @@ zlib, gcc, openmpi, cmake, python, cuda
 
 ---
 
-## Book an interactive node and execute
+## Send in a singularity batch job and execute
 
 ```
-salloc -t <time> -A <allocationID>
+#!/bin/bash -l
+#SBATCH -J myjob
+#SBATCH -A edu18.prace
+#SBATCH --reservation=prace-2018-10-25
+#SBATCH -t 1:00
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=8
+#SBATCH -o output_file.o
 module add gcc/6.2.0 openmpi/3.0-gcc-6.2 singularity
 mpirun -n 8 singularity exec -B /cfs/klemming hello_world.simg hello_world_mpi
 ```
@@ -424,13 +430,13 @@ mpirun -n 8 singularity exec -B /cfs/klemming hello_world.simg hello_world_mpi
 
 ---
 
-## @color[red](Run a HPC container)
+## @color[red](Exercise 4: Run a HPC container)
 
 @ol[](false)
 - Login into tegner.pdc.kth.se
 - load module singularity
 - Goto /pdc/vol/singularity/2.5.1/shub (**Path:** $PDC_SHUB)
-- execute the hello-world image
+- send in a job for the hello-world image
 @olend
 
 ---
@@ -488,7 +494,6 @@ From: ubuntu:latest
     mydata.txt /home
 %post
     apt-get -y update
-    apt-get install -y wget
     apt-get install -y build-essential
 %runscript
     echo "This is my runscript"
@@ -500,7 +505,7 @@ From: ubuntu:latest
 
 What image should we start with?
 
-- *Boostrap:*
+- *Bootstrap:*
   - shub
   - docker
   - localimage
@@ -534,7 +539,6 @@ What softwares should be installed in my container.
 ```
 %post
     apt-get -y update
-    apt-get install -y wget
     apt-get install -y build-essential
 ```
 
@@ -573,13 +577,14 @@ What should be executed with the run command.
 
 ---
 
-## @color[red](Create a recipe)
+## @color[red](Exercise 5: Create a recipe)
 
 @ol[](false)
 - Based on UBUNTU
 - Install compilers
 - Create a help text
 - Create a runscript
+- Run the recipe
 @olend
 
 ---
