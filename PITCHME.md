@@ -54,6 +54,7 @@ Container<br>
 ## Why do we want containers in HPC?
 
 - Escape “dependency hell”
+- Load fewer modules
 - Local and remote code works identically every time
 - One file contains everything and can be moved anywhere
 
@@ -69,7 +70,6 @@ Container<br>
 
 - The most know and utilized container software
 - Facilites workflow for creating, maintaining and distributing software
-- Containers are reproducible
 - Easy to install, well documented, standardized
 - Used by many scientist
 
@@ -89,7 +89,7 @@ Container<br>
 
 - Package software and dependencies in one file
 - Use same container in different SNIC clusters
-- Limits	user’s	privileges,	security	contexts
+- Limits user’s	privileges,	better security
 - Same user inside container as on host
 - No need for most modules
 - **Negligable performance decrease**
@@ -139,7 +139,7 @@ Install libraries<br>
 @snapend
 
 @snap[east align-left with-border]
-**HPC cluster)**<br>
+**HPC cluster**<br>
 **(USER)**<br>
 @color[#62922e](singularity shell)<br>
 @color[#62922e](singularity exec)<br>
@@ -215,6 +215,7 @@ Singularity my_image.simg:~> cat /etc/*-release
 @ol[](false)
 - Go to singularity hub and find the hello-world container (https://singularity-hub.org/collections)
 - build the container using singularity
+  (shub://<full name of container>)
 - Use the container shell and get acquainted with it 
 @olend
 
@@ -244,7 +245,6 @@ Singularity container built: my_sandbox
 $ sudo singularity shell -w my_sandbox
 Singularity: Invoking an interactive shell within container...
 Singularity my_sandbox:~>
-
 ```
 
 ---
@@ -255,15 +255,6 @@ Singularity my_sandbox:~>
 read inside container.
 
 **write mode:** You can read/write inside container.
-
----
-
-## How to transfer files into the container
-
-```
-$ sudo singularity exec -w my_sandbox mkdir singularity_folder
-$ sudo singularity shell -B my_folder:/root/singularity_folder -w my_sandbox
-```
 
 ---
 
@@ -283,6 +274,15 @@ Singularity my_image.simg:~> ls
 @snap[align-right]
 @color[red](Do it yourself:)
 @snapend
+
+---
+
+## How to transfer files into the container
+
+```
+$ sudo singularity exec -w my_sandbox mkdir singularity_folder
+$ sudo singularity shell -B my_folder:/root/singularity_folder -w my_sandbox
+```
 
 ---
 
@@ -387,6 +387,14 @@ Cleaning up...
 
 ---
 
+## Requirements
+
+- OpenMPI version must be the same in container and cluster
+- Compiler and version must be the same in container and cluster
+- You need to bind to the LUSTRE file system at PDC so it can be detected
+
+---
+
 ## What are the required tools
 
 wget, build-essential, lzip, m4, libgfortran3, gmp, mpfr, mpc,
@@ -398,14 +406,6 @@ zlib, gcc, openmpi, cmake, python, cuda
   - /cfs/klemming/pdc.vol.tegner/singularity/2.4.2/shub
 - **Image:** ubuntu-16.04.3-gcc-basic.simg
 - https://www.pdc.kth.se/software
-
----
-
-## Requirements
-
-- OpenMPI version must be the same in container and cluster
-- Compiler and version must be the same in container and cluster
-- You need to bind to the LUSTRE file system at PDC so it can be detected
 
 ---
 
@@ -434,9 +434,9 @@ mpirun -n 8 singularity exec -B /cfs/klemming hello_world.simg hello_world_mpi
 
 @ol[](false)
 - Login into tegner.pdc.kth.se
-- load module singularity
-- Goto /pdc/vol/singularity/2.5.1/shub (**Path:** $PDC_SHUB)
 - send in a job for the hello-world image
+  - Use the hello_world image on PDCs singularity repository
+  - With singularity module use the **Path:** $PDC_SHUB
 @olend
 
 ---
@@ -448,7 +448,7 @@ mpirun -n 8 singularity exec -B /cfs/klemming hello_world.simg hello_world_mpi
 Finds the relevant nVidia/CUDA libraries on your host.
  
 ```
-salloc -t <time> -A <allocationID> --gres=gpu:K420:1
+salloc -t <time> -A edu18.prace --gres=gpu:K420:1
 srun -N 1 singularity exec --nv -B /cfs/klemming cuda.simg cuda_device
 Device Number: 0
   Device name: Quadro K420
