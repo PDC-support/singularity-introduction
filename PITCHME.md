@@ -215,7 +215,7 @@ Singularity my_image.simg:~> cat /etc/*-release
 @ol[](false)
 - Go to singularity hub and find the hello-world container (https://singularity-hub.org/collections)
 - build the container using singularity
-  (shub://<full name of container>)
+  (shub://**full name of container**)
 - Use the container shell and get acquainted with it 
 @olend
 
