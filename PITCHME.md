@@ -215,7 +215,7 @@ Singularity my_image.simg:~> cat /etc/*-release
 @ol[](false)
 - Go to singularity hub and find the hello-world container (https://singularity-hub.org/collections)
 - build the container using singularity
-  (shub://**full name of container**)
+  (shub://[full name of container])
 - Use the container shell and get acquainted with it 
 @olend
 
@@ -249,19 +249,9 @@ Singularity my_sandbox:~>
 
 ---
 
-## Transfer files into container
-
-**Read mode:** You can read/write to file system outside container and
-read inside container.
-
-**write mode:** You can read/write inside container.
-
----
-
 ## How do I execute commands in singularity
 
-Commands in the container can be given as normal as long as the path
-are right.
+Commands in the container can be given as normal.
 
 ```
 singularity exec my_image.simg ls
@@ -271,9 +261,17 @@ $ singularity shell my_image.simg
 Singularity: Invoking an interactive shell within container...
 Singularity my_image.simg:~> ls
 ```
-@snap[align-right]
-@color[red](Do it yourself:)
-@snapend
+
+---
+
+## Transfer files into container
+
+**Read mode:** You can read/write to file system outside container and
+read inside container.
+
+**write mode:** You can read/write inside container.
+
+@color[red](Remember: In write mode you are user ROOT, home folder: /root)
 
 ---
 
@@ -282,7 +280,11 @@ Singularity my_image.simg:~> ls
 ```
 $ sudo singularity exec -w my_sandbox mkdir singularity_folder
 $ sudo singularity shell -B my_folder:/root/singularity_folder -w my_sandbox
+Singularity my_sandbox:~> cp singularity_folder/file1 .
 ```
+@snap[align-right]
+@color[red](Do it yourself:)
+@snapend
 
 ---
 
@@ -378,8 +380,10 @@ Cleaning up...
 @ol[](false)
 - Create a help file
 - Create/Edit the runscript running hello world
+  - Remember to make it executable
 - Create a new container from the sandbox
 @olend
+@color[red](**Tip:** You can use the editor in your VM and then transfer the file)
 
 ---
 
@@ -436,8 +440,8 @@ mpirun -n 8 singularity exec -B /cfs/klemming hello_world.simg hello_world_mpi
 - Login into tegner.pdc.kth.se
 - send in a job for the hello-world image
   - Use the hello_world image on PDCs singularity repository
-  - With singularity module use the **Path:** $PDC_SHUB
 @olend
+@color[red](**Tip:** With the singularity module use the **Path:** $PDC_SHUB)
 
 ---
 
@@ -586,6 +590,7 @@ What should be executed with the run command.
 - Create a runscript
 - Run the recipe
 @olend
+@color[red](**Tip:** You can use the editor in your VM and then transfer the file)
 
 ---
 
