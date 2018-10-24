@@ -100,7 +100,7 @@ Container<br>
 
 - Works great for local and private resources.
 - No HPC centra will install docker for you
-- **Singularity is compatible with Docker images**
+- **Singularity can import Docker images**
 
 ---
 
@@ -187,7 +187,7 @@ For Mac or Windows, follow instructions at https://www.sylabs.io/guides/2.6/user
 
 ---
 
-## Test singularity
+## Download and test an image
 
 Download and test the latest UBUNTU image from docker hub
 
@@ -210,7 +210,7 @@ Singularity my_image.simg:~> cat /etc/*-release
 
 ---
 
-## @color[red](Exercise 1: Test a container)
+## @color[red](Exercise 1: Download a container)
 
 @ol[](false)
 - Go to singularity hub and find the hello-world container (https://singularity-hub.org/collections)
@@ -315,6 +315,8 @@ drwxr-xr-x 2 root root   3 Sep 11 17:05 libs
 -rwxr-xr-x 1 root root  10 Sep 11 17:05 runscript.help
 ```
 
+@color[darkgreen](**Important:** The files must be executable and owned by root)
+
 ---
 
 ## Creating a script
@@ -380,7 +382,6 @@ Cleaning up...
 @ol[](false)
 - Create a help file
 - Create/Edit the runscript running hello world
-  - Remember to make it executable
 - Create a new container from the sandbox
 @olend
 
@@ -549,8 +550,8 @@ What softwares should be installed in my container.
 ```
 
 @snap[align-left]
-@color[red](No interaction in the scripts)<br>
-@color[red](We do not need sudo in the container)
+@color[darkgreen](No interaction in the scripts)<br>
+@color[darkgreen](We do not need sudo in the container)
 @snapend
 
 ---
@@ -592,7 +593,8 @@ What should be executed with the run command.
 - Create a runscript
 - Run the recipe
 @olend
-@color[red](**Tip:** You can use the editor in your VM and then transfer the file)
+
+@color[darkgreen](**Tip:** You can use the editor in your VM and then transfer the file)
 
 ---
 
