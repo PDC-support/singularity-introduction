@@ -271,7 +271,7 @@ read inside container.
 
 **write mode:** You can read/write inside container.
 
-@color[red](Remember: In write mode you are user ROOT, home folder: /root)
+@color[darkgreen](**Remember:** In write mode you are user ROOT, home folder: /root)
 
 ---
 
@@ -383,7 +383,8 @@ Cleaning up...
   - Remember to make it executable
 - Create a new container from the sandbox
 @olend
-@color[red](**Tip:** You can use the editor in your VM and then transfer the file)
+
+@color[darkgreen](**Tip:** You can use the editor in your VM and then transfer the file)
 
 ---
 
@@ -441,7 +442,8 @@ mpirun -n 8 singularity exec -B /cfs/klemming hello_world.simg hello_world_mpi
 - send in a job for the hello-world image
   - Use the hello_world image on PDCs singularity repository
 @olend
-@color[red](**Tip:** With the singularity module use the **Path:** $PDC_SHUB)
+
+@color[darkgreen](**Tip:** With the singularity module use the **Path:** $PDC_SHUB)
 
 ---
 
