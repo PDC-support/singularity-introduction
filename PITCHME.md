@@ -129,7 +129,7 @@ https://singularity-hub.org/
 **Local computer**<br>
 **(ROOT)**<br>
 Create container<br>
-@color[#62922e](singularity build)<br>
+@css[lightgreen](singularity build)<br>
 Install software<br>
 Install libraries<br>
 @snapend
@@ -141,10 +141,10 @@ Install libraries<br>
 @snap[east align-left with-border]
 **HPC cluster**<br>
 **(USER)**<br>
-@color[#62922e](singularity shell)<br>
-@color[#62922e](singularity exec)<br>
-@color[#62922e](singularity help)<br>
-@color[#62922e](singularity run)<br>
+@css[lightgreen](singularity shell)<br>
+@css[lightgreen](singularity exec)<br>
+@css[lightgreen](singularity help)<br>
+@css[lightgreen](singularity run)<br>
 @snapend
 
 ---
