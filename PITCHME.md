@@ -115,9 +115,9 @@ https://singularity-hub.org/
 
 ## Singularity Versions
 
-- Latest version: 3.0.0 (2018-10-08)
-- Installed on Tegner: 2.5.1
-- Installed on VM: 2.5.2
+- Latest version: 3.2.1-1 (2019-06-18)
+- Installed on Tegner: 3.2.1-1
+- Installed on VM: 3.2.1-1
 
 ---
 
@@ -151,22 +151,25 @@ Install libraries<br>
 
 ## Install singularity in Linux
 
-```
-$ VERSION=2.5.2
-$ sudo apt-get update
-$ sudo apt-get install libarchive-dev
-$ sudo apt-get install squashfs-tools
-# Get and install
-$ wget github.com/sylabs/singularity/releases/
-download/$VERSION/singularity-$VERSION.tar.gz
-$ tar xvf singularity-$VERSION.tar.gz
-$ cd singularity-$VERSION
-$ ./configure --prefix=/usr/local
-$ make
-$ sudo make install
-```
+1. Install dependencies
 
-For Mac or Windows, follow instructions at https://www.sylabs.io/guides/2.6/user-guide/installation.html
+   ```
+   build-essential
+   libssl-dev
+   uuid-dev
+   libgpgme11-dev
+   squashfs-tools
+   libseccomp-dev
+   wget
+   pkg-config
+   git
+   ```
+1. Install go (version 1.12.6 2019-06-19)
+1. Install singularity from source (version 3.2.1-1 2019-06-18)
+
+Follow instructions at https://www.sylabs.io/guides/3.2/user-guide/installation.html
+
+Singularity cannot be installed on Mac or Windows, but can be used via VMs
 
 ---
 
@@ -192,15 +195,17 @@ For Mac or Windows, follow instructions at https://www.sylabs.io/guides/2.6/user
 Download and test the latest UBUNTU image from docker hub
 
 ```
-$ sudo singularity build my_image.simg docker://ubuntu:latest
-Docker image path: index.docker.io/library/ubuntu:latest
-Cache folder set to /root/.singularity/docker
-Importing: base Singularity environment
-Building Singularity image...
-Singularity container built: my_image.simg
-$ singularity shell my_image.simg
-Singularity: Invoking an interactive shell within container...
-Singularity my_image.simg:~> cat /etc/*-release
+$ sudo singularity build my_image.sif docker://ubuntu:latest
+INFO:    Starting build...
+Getting image source signatures
+...
+Writing manifest to image destination
+Storing signatures
+INFO:    Creating SIF file...
+INFO:    Build complete: my_image.sif 
+$ singularity shell my_image.sif
+Singularity my_image.sif:~> cat /etc/*-release
+Singularity my_image.sif:~> exit
 
 ```
 
@@ -239,9 +244,10 @@ Since there are memory limitation on writing directly to image file,
 it is better to create a sandbox
 
 ```
-$ sudo singularity build --sandbox my_sandbox my_image.simg
-Building from local image: my_image.simg
-Singularity container built: my_sandbox
+$ sudo singularity build --sandbox my_sandbox my_image.sif
+INFO:    Starting build...
+INFO:    Creating sandbox directory...
+INFO:    Build complete: my_sandbox 
 $ sudo singularity shell -w my_sandbox
 Singularity: Invoking an interactive shell within container...
 Singularity my_sandbox:~>
@@ -254,12 +260,12 @@ Singularity my_sandbox:~>
 Commands in the container can be given as normal.
 
 ```
-singularity exec my_image.simg ls
+singularity exec my_image.sif ls
 ```
 ```
-$ singularity shell my_image.simg
+$ singularity shell my_image.sif
 Singularity: Invoking an interactive shell within container...
-Singularity my_image.simg:~> ls
+Singularity my_image.sif:~> ls
 ```
 
 ---
@@ -277,11 +283,23 @@ read inside container.
 
 ## How to transfer files into the container
 
+my_folder is a local folder on your computer
+
 ```
 $ sudo singularity exec -w my_sandbox mkdir singularity_folder
 $ sudo singularity shell -B my_folder:/root/singularity_folder -w my_sandbox
 Singularity my_sandbox:~> cp singularity_folder/file1 .
 ```
+
+## How to execute scripts outside image
+
+* All the dependencies in image
+* Script outside image
+
+```
+$ singularity exec -B my_folder:/root/singularity_folder my_sandbox singularity_folder/script
+```
+
 @snap[align-right]
 @color[red](Do it yourself:)
 @snapend
@@ -306,16 +324,19 @@ Singularity my_sandbox:~> cp singularity_folder/file1 .
 Startup scripts etc... for your singularity image
 
 ```
-$ singularity exec my_image.simg ls -l /.singularity.d
-total 1
-drwxr-xr-x 2 root root  76 Sep 11 17:05 actions
-drwxr-xr-x 2 root root 139 Sep 11 17:23 env
-drwxr-xr-x 2 root root   3 Sep 11 17:05 libs
--rwxr-xr-x 1 root root  33 Sep 11 17:23 runscript
--rwxr-xr-x 1 root root  10 Sep 11 17:05 runscript.help
+$ singularity exec my_image.sif ls -l /.singularity.d
+total 7
+-rw-r--r-- 1 root root   39 Jun 18 11:26 Singularity
+drwxr-xr-x 2 root root 4096 Jun 18 11:22 actions
+drwxr-xr-x 2 root root  173 Jun 18 11:26 env
+-rw-r--r-- 1 root root  309 Jun 18 11:26 labels.json
+drwxr-xr-x 2 root root    3 Jun 18 11:26 libs
+-rwxr-xr-x 1 root root 1084 Jun 18 11:26 runscript
+-rwxr-xr-x 1 root root   19 Jun 18 11:26 runscript.help
+-rwxr-xr-x 1 root root   10 Jun 18 11:26 startscript 
 ```
 
-@color[darkgreen](**Important:** The files must be executable and owned by root)
+@color[darkgreen](**Important:** Scripts must be executable and owned by root)
 
 ---
 
@@ -334,7 +355,7 @@ ls -l
 command
 @snapend
 ```
-$ singularity run my_image.simg
+$ singularity run my_image.sif
 total 1
 drwxr-xr-x 2 root root  76 Sep 11 17:05 file1
 drwxr-xr-x 2 root root 139 Sep 11 17:23 file2
@@ -355,7 +376,7 @@ This is a text file
 command
 @snapend
 ```
-$ singularity help my_image.simg
+$ singularity run-help my_image.sif
 This is a text file
 ```
 
@@ -364,11 +385,10 @@ This is a text file
 ## Build a new container from a sandbox
 
 ```
-$ sudo singularity build my_new_image.simg my_sandbox
-Building image from sandbox: my_sandbox
-Building Singularity image...
-Singularity container built: my_new_image.simg
-Cleaning up...
+$ sudo singularity build my_new_image.sif my_sandbox
+INFO:    Starting build...
+INFO:    Creating SIF file...
+INFO:    Build complete: my_new_image.sif 
 ```
 
 @snap[align-right]
@@ -407,9 +427,9 @@ wget, build-essential, lzip, m4, libgfortran3, gmp, mpfr, mpc,
 zlib, gcc, openmpi, cmake, python, cuda
 
 - On AFS
-  - /afs/pdc.kth.se/pdc/vol/singularity/2.5.1/shub.backup
+  - /afs/pdc.kth.se/pdc/vol/singularity/3.2.1/shub.backup
 - On Lustre
-  - /cfs/klemming/pdc.vol.tegner/singularity/2.4.2/shub
+  - /cfs/klemming/pdc.vol.tegner/singularity/3.2.1/shub
 - **Image:** ubuntu-16.04.3-gcc-basic.simg
 - https://www.pdc.kth.se/software
 
@@ -420,14 +440,14 @@ zlib, gcc, openmpi, cmake, python, cuda
 ```
 #!/bin/bash -l
 #SBATCH -J myjob
-#SBATCH -A edu18.prace
-#SBATCH --reservation=prace-2018-10-25
+#SBATCH -A <Allocation ID>
+#SBATCH --reservation=<Reservation ID>
 #SBATCH -t 1:00
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=8
 #SBATCH -o output_file.o
 module add gcc/6.2.0 openmpi/3.0-gcc-6.2 singularity
-mpirun -n 8 singularity exec -B /cfs/klemming hello_world.simg hello_world_mpi
+mpirun -n 8 singularity exec -B /cfs/klemming hello_world.sif hello_world_mpi
 ```
 
 @snap[align-right]
@@ -455,8 +475,8 @@ mpirun -n 8 singularity exec -B /cfs/klemming hello_world.simg hello_world_mpi
 Finds the relevant nVidia/CUDA libraries on your host.
  
 ```
-salloc -t <time> -A edu18.prace --gres=gpu:K420:1
-srun -N 1 singularity exec --nv -B /cfs/klemming cuda.simg cuda_device
+salloc -t <time> -A <Allocation ID> --gres=gpu:K420:1
+srun -N 1 singularity exec --nv -B /cfs/klemming cuda.sif cuda_device
 Device Number: 0
   Device name: Quadro K420
   Memory Clock Rate (KHz): 891000
@@ -474,7 +494,9 @@ Device Number: 0
 
 A Singularity Recipe is the driver of a custom build, and the starting point
 for designing any custom container. It includes specifics about installation
-software, environment variables, files to add, and container metadata
+software, environment variables, files to add, and container metadata.
+
+Singularity recipes is also a good practice for keeping your image up-to-date
 
 ---
 
@@ -483,7 +505,7 @@ software, environment variables, files to add, and container metadata
 A recipe is a textfile explaining what should be put into the container
 
 ```
-sudo singularity build my_image.simg my_recipe
+sudo singularity build my_image.sif my_recipe.def
 ```
 
 ---
@@ -601,5 +623,5 @@ What should be executed with the run command.
 ## Useful links
 
 - https://www.pdc.kth.se/software/software/singularity/
-- https://www.sylabs.io/guides/2.6/user-guide/
+- https://www.sylabs.io/guides/3.2/user-guide/
 - https://gitpitch.com/PDC-support/singularity-introduction#/
