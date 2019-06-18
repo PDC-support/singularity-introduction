@@ -151,21 +151,22 @@ Install libraries<br>
 
 ## Install singularity in Linux
 
-1. Install dependencies
+* Install dependencies
 
-   ```
-   build-essential
-   libssl-dev
-   uuid-dev
-   libgpgme11-dev
-   squashfs-tools
-   libseccomp-dev
-   wget
-   pkg-config
-   git
-   ```
-1. Install go (version 1.12.6 2019-06-19)
-1. Install singularity from source (version 3.2.1-1 2019-06-18)
+```
+build-essential
+libssl-dev
+uuid-dev
+libgpgme11-dev
+squashfs-tools
+libseccomp-dev
+wget
+pkg-config
+git
+```
+
+* Install go (version 1.12.6 2019-06-19)
+* Install singularity from source (version 3.2.1-1 2019-06-18)
 
 Follow instructions at https://www.sylabs.io/guides/3.2/user-guide/installation.html
 
