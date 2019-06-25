@@ -152,21 +152,12 @@ Install libraries<br>
 ## Install singularity in Linux
 
 * Install dependencies
-
-```
-build-essential
-libssl-dev
-uuid-dev
-libgpgme11-dev
-squashfs-tools
-libseccomp-dev
-wget
-pkg-config
-git
-```
-
-* Install go (version 1.12.6 2019-06-19)
-* Install singularity from source (version 3.2.1-1 2019-06-18)
+  ```
+  build-essential libssl-dev uuid-dev libgpgme11-dev
+  squashfs-tools libseccomp-dev wget pkg-config git
+  ```
+* Install go (version 1.12.6, 2019-06-19)
+* Install singularity from source (version 3.2.1-1, 2019-06-18)
 
 Follow instructions at https://www.sylabs.io/guides/3.2/user-guide/installation.html
 
@@ -176,13 +167,13 @@ Singularity cannot be installed on Mac or Windows, but can be used via VMs
 
 ## Launching a container
 
-- Singularity sets up the container environment and creates the necessary
+* Singularity sets up the container environment and creates the necessary
   namespaces.
-- Directories, files and other resources are shared from the host into the
+* Directories, files and other resources are shared from the host into the
   container.
-- All expected I/O is passed through the container: pipes, program arguments,
+* All expected I/O is passed through the container: pipes, program arguments,
   std, X11
-- When the application(s) finish their foreground execution process, the
+* When the application(s) finish their foreground execution process, the
   container and namespaces collapse and vanish cleanly
 
 ---
@@ -207,7 +198,6 @@ INFO:    Build complete: my_image.sif
 $ singularity shell my_image.sif
 Singularity my_image.sif:~> cat /etc/*-release
 Singularity my_image.sif:~> exit
-
 ```
 
 @snap[align-right]
@@ -623,6 +613,9 @@ What should be executed with the run command.
 
 ## Useful links
 
-- https://www.pdc.kth.se/software/software/singularity/
+- https://www.pdc.kth.se/software/software/singularity/index_general.html
 - https://www.sylabs.io/guides/3.2/user-guide/
 - https://gitpitch.com/PDC-support/singularity-introduction#/
+
+Answers to Exercises
+- https://github.com/PDC-support/singularity-introduction/blob/master/facit.md

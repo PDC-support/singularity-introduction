@@ -9,3 +9,5 @@ This presentation can be viewed at
 https://gitpitch.com/PDC-support/singularity-introduction
 
 This presentation+exercises was used at a 4 hours workshop (Coffeebreak: 30 min was included)
+and includes 5 exercises. Estimate 20 min/exercise and 1 hour for presentation.
+
