@@ -10,10 +10,10 @@ $ singularity run my_image.sif
 
 ```
 $ sudo singularity build my_image.sif docker://ubuntu:latest
-$ sudo singularity build --sandbox my_sandbox my_img.sif
+$ sudo singularity build --sandbox my_sandbox my_image.sif
 $ sudo singularity shell -w my_sandbox
-Singularity my_sandbox:~> sudo apt-get update
-Singularity my_sandbox:~> sudo apt-get install build-essential
+Singularity my_sandbox:~> apt-get update
+Singularity my_sandbox:~> apt-get install build-essential
 ```
 
 # Exercise 3
@@ -43,6 +43,7 @@ mpirun -n 8 singularity exec -B /cfs/klemming $PDC_SHUB/hello_world.sif hello_wo
 
 # Exercise 5
 
+**my_recipy.rec**
 ```
 # Header
 Bootstrap: docker
@@ -55,4 +56,9 @@ From: ubuntu:latest
 %post
   apt-get -y update
   apt-get install -y build-essential
+```
+
+Building:
+```
+sudo singularity build my_new_image.sif my_recipy.rec
 ```

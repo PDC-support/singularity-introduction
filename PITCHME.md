@@ -282,6 +282,8 @@ $ sudo singularity shell -B my_folder:/root/singularity_folder -w my_sandbox
 Singularity my_sandbox:~> cp singularity_folder/file1 .
 ```
 
+---
+
 ## How to execute scripts outside image
 
 * All the dependencies in image
