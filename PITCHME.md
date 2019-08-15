@@ -495,7 +495,7 @@ Singularity recipes is also a good practice for keeping your image up-to-date
 A recipe is a textfile explaining what should be put into the container
 
 ```
-sudo singularity build my_image.sif my_recipe.def
+$ sudo singularity build my_image.sif my_recipe.def
 ```
 
 ---
@@ -593,6 +593,16 @@ What should be executed with the run command.
 @snap[align-right]
 @color[red](Do it yourself:)
 @snapend
+
+---
+
+## How to inspect an image
+
+How to examine an image to see what recipy has created it
+
+```
+$ singularity inspect my_image.sif
+```
 
 ---
 
