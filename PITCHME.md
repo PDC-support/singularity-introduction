@@ -601,7 +601,7 @@ What should be executed with the run command.
 How to examine an image to see what recipy has created it
 
 ```
-$ singularity inspect my_image.sif
+$ singularity inspect --deffile my_image.sif
 ```
 
 ---
