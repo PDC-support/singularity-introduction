@@ -26,7 +26,7 @@
 ---
 
 @snap[north-west]
-A container is an executable file of software with everything needed to run an application
+A container is standalone executable file with everything needed to run application(s)
 @snapend
 
 @snap[south-west size40 border-image]
@@ -158,8 +158,7 @@ Install libraries<br>
 * Install go (version 1.12.6, 2019-06-19)
 * Install singularity (version 3.2.1-1, 2019-06-18)
 * Follow instructions at https://www.sylabs.io/guides/3.2/user-guide/installation.html
-
-Singularity cannot be installed on Mac or Windows, but can be used via VMs
+* @color[red](Singularity cannot be installed on Mac or Windows, but can be used via VMs)
 
 ---
 
