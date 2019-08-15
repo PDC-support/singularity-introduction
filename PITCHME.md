@@ -26,8 +26,7 @@
 ---
 
 @snap[north-west]
-A container image is a lightweight, standalone, executable package of
-software that includes everything needed to run an application.
+A container is an executable file of software with everything needed to run an application
 @snapend
 
 @snap[south-west size40 border-image]
@@ -157,9 +156,8 @@ Install libraries<br>
   squashfs-tools libseccomp-dev wget pkg-config git
   ```
 * Install go (version 1.12.6, 2019-06-19)
-* Install singularity from source (version 3.2.1-1, 2019-06-18)
-
-Follow instructions at https://www.sylabs.io/guides/3.2/user-guide/installation.html
+* Install singularity (version 3.2.1-1, 2019-06-18)
+* Follow instructions at https://www.sylabs.io/guides/3.2/user-guide/installation.html
 
 Singularity cannot be installed on Mac or Windows, but can be used via VMs
 
