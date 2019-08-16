@@ -624,6 +624,7 @@ $ singularity inspect --deffile my_image.sif
 - https://www.pdc.kth.se/software/software/singularity/index_general.html
 - https://www.sylabs.io/guides/3.2/user-guide/
 - https://gitpitch.com/PDC-support/singularity-introduction#/
+- https://github.com/PDC-support/singularity-recipes
 
 Answers to Exercises
 - https://github.com/PDC-support/singularity-introduction/blob/master/facit.md
