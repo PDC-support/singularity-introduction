@@ -406,7 +406,6 @@ INFO:    Build complete: my_new_image.sif
 ## Requirements
 
 - OpenMPI version must be the same in container and cluster
-- Compiler and version must be the same in container and cluster
 - You need to bind to the LUSTRE file system at PDC so it can be detected
 
 ---
@@ -420,7 +419,7 @@ zlib, gcc, openmpi, cmake, python, cuda
   - /afs/pdc.kth.se/pdc/vol/singularity/3.2.1/shub.backup
 - On Lustre
   - /cfs/klemming/pdc.vol.tegner/singularity/3.2.1/shub
-- **Image:** ubuntu-16.04.3-gcc-basic.simg
+- **Image:** ubuntu-18.04.2-gcc-basic.simg
 - https://www.pdc.kth.se/software
 
 ---
@@ -436,7 +435,7 @@ zlib, gcc, openmpi, cmake, python, cuda
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=8
 #SBATCH -o output_file.o
-module add gcc/6.2.0 openmpi/3.0-gcc-6.2 singularity
+module add gcc/8.2.0 openmpi/4.0-gcc-8.2 singularity/3.2.1
 mpirun -n 8 singularity exec -B /cfs/klemming hello_world.sif hello_world_mpi
 ```
 
