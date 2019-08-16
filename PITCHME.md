@@ -419,7 +419,7 @@ zlib, gcc, openmpi, cmake, python, cuda
   - /afs/pdc.kth.se/pdc/vol/singularity/3.2.1/shub.backup
 - On Lustre
   - /cfs/klemming/pdc.vol.tegner/singularity/3.2.1/shub
-- **Image:** ubuntu-18.04.2-gcc-basic.simg
+- **Image:** ubuntu-18.04.2-gnu-basic.sif
 - https://www.pdc.kth.se/software
 
 ---
