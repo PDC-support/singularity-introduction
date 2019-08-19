@@ -68,7 +68,7 @@ Container<br>
 ## The Docker container software
 
 - The most know and utilized container software
-- Facilites workflow for creating, maintaining and distributing software
+- Facilitates workflow for creating, maintaining and distributing software
 - Easy to install, well documented, standardized
 - Used by many scientist
 
@@ -589,10 +589,6 @@ What should be executed with the run command.
     
 ```
 
-@snap[align-right]
-@color[red](Do it yourself:)
-@snapend
-
 ---
 
 ## How to inspect an image
@@ -602,6 +598,10 @@ How to examine an image to see what recipy has created it
 ```
 $ singularity inspect --deffile my_image.sif
 ```
+
+@snap[align-right]
+@color[red](Do it yourself:)
+@snapend
 
 ---
 
