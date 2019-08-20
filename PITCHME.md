@@ -103,11 +103,11 @@ Container<br>
 
 ---
 
-## Singularity hub
+## Singularity homepage
 
-https://singularity-hub.org/
+https://sylabs.io/
 @snap[with-border]
-![](img/hub.png)
+![](img/homepage.png)
 @snapend
 
 ---
@@ -206,9 +206,9 @@ Singularity my_image.sif:~> exit
 ## @color[red](Exercise 1: Download a container)
 
 @ol[](false)
-- Go to singularity hub and find the hello-world container (https://singularity-hub.org/collections)
+- Go to singularity cloud and find the hello-world container (https://cloud.sylabs.io/library)
 - build the container using singularity
-  (shub://[full name of container])
+  (library://[full name of container])
 - Use the container shell and get acquainted with it 
 @olend
 
@@ -524,9 +524,10 @@ From: ubuntu:latest
 What image should we start with?
 
 - *Bootstrap:*
-  - shub
+  - library
   - docker
   - localimage
+  - shub
 - *From:*
   - The name of the container
 ```
